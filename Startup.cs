@@ -31,9 +31,16 @@ namespace DairyAPI
             services.AddDbContext<CowContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("DairyConnection")));
 
+            services.AddDbContext<FarmContext>(opt => opt.UseSqlServer
+                (Configuration.GetConnectionString("DairyConnection")));
+
             services.AddControllers();
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddScoped<ICowRepo, CowRepo>();
+
+            services.AddScoped<IFarmRepo, FarmRepo>();
 
             services.AddSwaggerGen(c =>
             {

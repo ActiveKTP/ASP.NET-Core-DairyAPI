@@ -1,13 +1,10 @@
-using System.ComponentModel.DataAnnotations;
-
-namespace DairyAPI.Models
+namespace DairyAPI.Dtos
 {
-    public class Farm
+    public class FarmReadDto
     {
-        [Key]
         public string fFarmId { get; set; }
         public string fName { get; set; }
-        public string fStatus { get; set; }
+        //public string fStatus { get; set; }
         public string fAmphurCode { get; set; }
         public string fProvinceCode { get; set; }
 

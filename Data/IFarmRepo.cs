@@ -6,6 +6,6 @@ namespace DairyAPI.Data
     public interface IFarmRepo
     {
         IEnumerable<Farm> GetAllFarms();
-        Farm GetFarmById(int ccowNo);
+        Farm GetFarmById(string fFarmId);
     }
 }

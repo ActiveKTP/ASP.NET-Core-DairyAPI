@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using AutoMapper;
 using DairyAPI.Data;
+using DairyAPI.Dtos;
 using DairyAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,24 +12,31 @@ namespace DairyAPI.Controllers
     public class CowController : ControllerBase
     {
         private readonly ICowRepo _repository;
+        private readonly IMapper _mapper;
 
-        public CowController(ICowRepo repository)
+        public CowController(ICowRepo repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Cow>> GetAllCows()
+        public ActionResult<IEnumerable<CowReadDto>> GetAllCows()
         {
-            var cowlist = _repository.GetAllCows();
-            return Ok(cowlist);
+            var cows = _repository.GetAllCows();
+            return Ok(_mapper.Map<IEnumerable<CowReadDto>>(cows));
         }
 
         [HttpGet("{ccowId}")]
-        public ActionResult<Cow> GetCowById(string ccowId)
+        public ActionResult<CowReadDto> GetCowById(string ccowId)
         {
-            var cowlist = _repository.GetCowById(ccowId);
-            return Ok(cowlist);
+            var cow = _repository.GetCowById(ccowId);
+            if (cow != null)
+            {
+                return Ok(_mapper.Map<CowReadDto>(cow));
+                //return Ok(cow);
+            }
+            return NotFound();
         }
     }
 }
