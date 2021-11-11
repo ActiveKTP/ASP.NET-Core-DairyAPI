@@ -6,9 +6,9 @@ namespace DairyAPI.Data
 {
     public class CowRepo : ICowRepo
     {
-        private readonly CowContext _context;
+        private readonly DairyContext _context;
 
-        public CowRepo(CowContext context)
+        public CowRepo(DairyContext context)
         {
             _context = context;
         }

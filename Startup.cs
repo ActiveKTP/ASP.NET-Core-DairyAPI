@@ -28,10 +28,13 @@ namespace DairyAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<CowContext>(opt => opt.UseSqlServer
+            /*services.AddDbContext<CowContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("DairyConnection")));
 
             services.AddDbContext<FarmContext>(opt => opt.UseSqlServer
+                (Configuration.GetConnectionString("DairyConnection")));*/
+
+            services.AddDbContext<DairyContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("DairyConnection")));
 
             services.AddControllers();

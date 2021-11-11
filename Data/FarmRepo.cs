@@ -6,26 +6,57 @@ namespace DairyAPI.Data
 {
     public class FarmRepo : IFarmRepo
     {
-        private readonly FarmContext _context;
+        private readonly DairyContext _farmContext;
 
-        public FarmRepo(FarmContext context)
+        public FarmRepo(DairyContext farmContext)
         {
-            _context = context;
+            _farmContext = farmContext;
         }
 
         public IEnumerable<Farm> GetAllFarms()
         {
-            var farms = (from farm in _context.Farm
+            var farms = (from farm in _farmContext.Farm
+                         join province in _farmContext.RefProvince on farm.fProvinceCode equals province.refProvinceId
+                         join amphur in _farmContext.RefAmphur on farm.fAmphurCode equals amphur.refAmphurId
                          where (farm.fStatus == "01")
                          orderby farm.fFarmId
-                         select farm).Take(50);
+                         //select farm
+                         select new Farm
+                         {
+                             fFarmId = farm.fFarmId,
+                             fName = farm.fName,
+                             fStatus = farm.fStatus,
+                             fAmphurCode = farm.fAmphurCode,
+                             fProvinceCode = farm.fProvinceCode,
+                             aiZone = farm.aiZone,
+                             fAmphurName = amphur.refAmphurName,
+                             fProvinceName = province.refProvinceName
+                         }
+                         ).Take(50);
             return farms;
         }
 
         public Farm GetFarmById(string fFarmId)
         {
-            var farm = _context.Farm.FirstOrDefault(i => i.fFarmId == fFarmId);
-            return farm;
+            var farms = (from farm in _farmContext.Farm
+                         join province in _farmContext.RefProvince on farm.fProvinceCode equals province.refProvinceId
+                         join amphur in _farmContext.RefAmphur on farm.fAmphurCode equals amphur.refAmphurId
+                         //where (farm.fStatus == "01")
+                         orderby farm.fFarmId
+                         //select farm
+                         select new Farm
+                         {
+                             fFarmId = farm.fFarmId,
+                             fName = farm.fName,
+                             fStatus = farm.fStatus,
+                             fAmphurCode = farm.fAmphurCode,
+                             fProvinceCode = farm.fProvinceCode,
+                             aiZone = farm.aiZone,
+                             fAmphurName = amphur.refAmphurName,
+                             fProvinceName = province.refProvinceName
+                         }
+                         ).FirstOrDefault(i => i.fFarmId == fFarmId);
+            return farms;
         }
 
     }

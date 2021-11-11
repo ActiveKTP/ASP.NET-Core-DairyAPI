@@ -14,7 +14,7 @@ namespace DairyAPI.Dtos
 
         //[DataType(DataType.Date)]
         //[DisplayFormat(DataFormatString = "{MM/dd/yyyy}")]
-        public string cBirthDate { get; set; }
+        public DateTime cBirthDate { get; set; }
 
         public string cStatus { get; set; }
         public string cProductionStatus { get; set; }
@@ -28,9 +28,45 @@ namespace DairyAPI.Dtos
             get
             {
                 //cBirthDate = "01/01/64";
-                var date_th = cBirthDate.Split(' ')[0].Split('/');
+                var date_th = cBirthDate.ToString().Split(' ')[0].Split('/');
 
                 return $"{date_th[1]}/{date_th[0]}/{Int32.Parse(date_th[2]) + 543}";
+            }
+            set { }
+        }
+
+        public int Age_day
+        {
+            get
+            {
+                var startDate = cBirthDate;
+                var currentDate = DateTime.Today;
+                var diff = (currentDate - startDate).Days;
+                return diff;
+            }
+            set { }
+        }
+
+        public string cAge
+        {
+            get
+            {
+                var startDate = cBirthDate;
+                var currentDate = DateTime.Today;
+                var diff = (currentDate - startDate).TotalDays;
+                var totalYears = Math.Truncate(diff / 365);
+                var totalMonths = Math.Truncate((diff % 365) / 30);
+                var cAge = $"{totalYears}-{totalMonths}";
+                return cAge;
+            }
+            set { }
+        }
+        public DateTime currentDate
+        {
+            get
+            {
+                DateTime newDate = DateTime.Today;
+                return newDate;
             }
             set { }
         }

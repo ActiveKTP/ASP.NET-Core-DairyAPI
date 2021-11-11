@@ -9,5 +9,9 @@ namespace DairyAPI.Dtos
         public string fProvinceCode { get; set; }
 
         public string aiZone { get; set; }
+
+        public string fAmphurName { get; set; }
+
+        public string fProvinceName { get; set; }
     }
 }
