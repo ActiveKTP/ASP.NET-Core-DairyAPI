@@ -2,7 +2,7 @@ using System;
 
 namespace DairyAPI.Dtos
 {
-    public class CowReadDto
+    public class CowFarmsReadDto
     {
 
         public string ccowId { get; set; }
@@ -11,14 +11,11 @@ namespace DairyAPI.Dtos
         public string cSireId { get; set; }
         public string cDamId { get; set; }
 
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(DataFormatString = "{MM/dd/yyyy}")]
         public DateTime cBirthDate { get; set; }
 
         public string cStatus { get; set; }
         public string cProductionStatus { get; set; }
         public string cMilkingStatus { get; set; }
-        public string cFarmId { get; set; }
         public int? cLactation { get; set; }
         public int? cNumOfService { get; set; }
 
@@ -60,6 +57,15 @@ namespace DairyAPI.Dtos
             }
             set { }
         }
+
+        public string fFarmId { get; set; }
+        public string fName { get; set; }
+        //public string fStatus { get; set; }
+        public string fAmphurCode { get; set; }
+        public string fProvinceCode { get; set; }
+        public string fAmphurName { get; set; }
+        public string fProvinceName { get; set; }
+        public string aiZone { get; set; }
         public DateTime currentDate
         {
             get
