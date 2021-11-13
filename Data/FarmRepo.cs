@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DairyAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DairyAPI.Data
 {
@@ -13,7 +15,7 @@ namespace DairyAPI.Data
             _farmContext = farmContext;
         }
 
-        public IEnumerable<Farm> GetAllFarms()
+        public async Task<IEnumerable<Farm>> GetAllFarms()
         {
             var farms = (from farm in _farmContext.Farm
                          join province in _farmContext.RefProvince on farm.fProvinceCode equals province.refProvinceId
@@ -32,11 +34,11 @@ namespace DairyAPI.Data
                              fAmphurName = amphur.refAmphurName,
                              fProvinceName = province.refProvinceName
                          }
-                         ).Take(50);
-            return farms;
+                         ).Take(50).ToListAsync();
+            return await farms;
         }
 
-        public Farm GetFarmById(string fFarmId)
+        public async Task<Farm> GetFarmById(string fFarmId)
         {
             var farms = (from farm in _farmContext.Farm
                          join province in _farmContext.RefProvince on farm.fProvinceCode equals province.refProvinceId
@@ -55,8 +57,8 @@ namespace DairyAPI.Data
                              fAmphurName = amphur.refAmphurName,
                              fProvinceName = province.refProvinceName
                          }
-                         ).FirstOrDefault(i => i.fFarmId == fFarmId);
-            return farms;
+                         ).FirstOrDefaultAsync(i => i.fFarmId == fFarmId);
+            return await farms;
         }
 
     }

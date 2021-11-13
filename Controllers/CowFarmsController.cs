@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using DairyAPI.Data;
 using DairyAPI.Dtos;
@@ -21,58 +22,86 @@ namespace DairyAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CowFarmsReadDto>> GetAllCowFarms()
+        public async Task<ActionResult<IEnumerable<CowFarmsReadDto>>> GetAllCowFarms()
         {
-            var cows = _repository.GetAllCowFarms();
-            return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            var cows = await _repository.GetAllCowFarms();
+            if (cows != null)
+            {
+                return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            }
+            return NotFound();
         }
 
         [Route("age/m4")]
         [HttpGet]
-        public ActionResult<IEnumerable<CowFarmsReadDto>> GetAllCowFarms_Age4m()
+        public async Task<ActionResult<IEnumerable<CowFarmsReadDto>>> GetAllCowFarms_Age4m()
         {
-            var cows = _repository.GetAllCowFarms_Age4m();
-            return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            var cows = await _repository.GetAllCowFarms_Age4m();
+            if (cows != null)
+            {
+                return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            }
+            return NotFound();
         }
 
         [Route("age/m4/{aiZone}")]
         [HttpGet]
-        public ActionResult<IEnumerable<CowFarmsReadDto>> GetAllCowFarms_Age4mByaiZone(string aiZone)
+        public async Task<ActionResult<IEnumerable<CowFarmsReadDto>>> GetAllCowFarms_Age4mByaiZone(string aiZone)
         {
-            var cows = _repository.GetAllCowFarms_Age4mByaiZone(aiZone);
-            return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            var cows = await _repository.GetAllCowFarms_Age4mByaiZone(aiZone);
+            if (cows != null)
+            {
+                return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            }
+            return NotFound();
         }
 
         [Route("age/m12")]
         [HttpGet]
-        public ActionResult<IEnumerable<CowFarmsReadDto>> GetAllCowFarms_Age12m()
+        public async Task<ActionResult<IEnumerable<CowFarmsReadDto>>> GetAllCowFarms_Age12m()
         {
-            var cows = _repository.GetAllCowFarms_Age12m();
-            return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            var cows = await _repository.GetAllCowFarms_Age12m();
+            if (cows != null)
+            {
+                return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            }
+            return NotFound();
         }
 
         [Route("age/m12/{aiZone}")]
         [HttpGet]
-        public ActionResult<IEnumerable<CowFarmsReadDto>> GetAllCowFarms_Age12mByaiZone(string aiZone)
+        public async Task<ActionResult<IEnumerable<CowFarmsReadDto>>> GetAllCowFarms_Age12mByaiZone(string aiZone)
         {
-            var cows = _repository.GetAllCowFarms_Age12mByaiZone(aiZone);
-            return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            var cows = await _repository.GetAllCowFarms_Age12mByaiZone(aiZone);
+            if (cows != null)
+            {
+                return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            }
+            return NotFound();
         }
 
         [Route("age/m18")]
         [HttpGet]
-        public ActionResult<IEnumerable<CowFarmsReadDto>> GetAllCowFarms_Age18m()
+        public async Task<ActionResult<IEnumerable<CowFarmsReadDto>>> GetAllCowFarms_Age18m()
         {
-            var cows = _repository.GetAllCowFarms_Age18m();
-            return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            var cows = await _repository.GetAllCowFarms_Age18m();
+            if (cows != null)
+            {
+                return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            }
+            return NotFound();
         }
 
         [Route("age/m18/{aiZone}")]
         [HttpGet]
-        public ActionResult<IEnumerable<CowFarmsReadDto>> GetAllCowFarms_Age18mByaiZone(string aiZone)
+        public async Task<ActionResult<IEnumerable<CowFarmsReadDto>>> GetAllCowFarms_Age18mByaiZone(string aiZone)
         {
-            var cows = _repository.GetAllCowFarms_Age18mByaiZone(aiZone);
-            return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            var cows = await _repository.GetAllCowFarms_Age18mByaiZone(aiZone);
+            if (cows != null)
+            {
+                return Ok(_mapper.Map<IEnumerable<CowFarmsReadDto>>(cows));
+            }
+            return NotFound();
         }
     }
 }

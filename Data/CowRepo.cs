@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DairyAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DairyAPI.Data
 {
@@ -16,7 +18,7 @@ namespace DairyAPI.Data
             add = 360;
         }
 
-        public IEnumerable<CowFarms> GetAllCowFarms()
+        public async Task<IEnumerable<CowFarms>> GetAllCowFarms()
         {
             var cowFarms = (from
                          cow in _context.Cow
@@ -30,6 +32,7 @@ namespace DairyAPI.Data
                             //select farm
                             select new CowFarms
                             {
+                                ccowNo = cow.ccowNo,
                                 ccowId = cow.ccowId,
                                 ccowName = cow.ccowName,
                                 cSex = cow.cSex,
@@ -49,11 +52,11 @@ namespace DairyAPI.Data
                                 fProvinceName = province.refProvinceName,
                                 aiZone = farm.aiZone
                             }
-                         ).Take(100);
-            return cowFarms;
+                         ).Take(100).ToListAsync();
+            return await cowFarms;
         }
 
-        public IEnumerable<CowFarms> GetAllCowFarms_Age12m()
+        public async Task<IEnumerable<CowFarms>> GetAllCowFarms_Age12m()
         {
             //int add = 730;
             DateTime now = DateTime.Now;
@@ -75,6 +78,7 @@ namespace DairyAPI.Data
                             //select farm
                             select new CowFarms
                             {
+                                ccowNo = cow.ccowNo,
                                 ccowId = cow.ccowId,
                                 ccowName = cow.ccowName,
                                 cSex = cow.cSex,
@@ -94,11 +98,11 @@ namespace DairyAPI.Data
                                 fProvinceName = province.refProvinceName,
                                 aiZone = farm.aiZone
                             }
-                         );
-            return cowFarms;
+                         ).ToListAsync();
+            return await cowFarms;
         }
 
-        public IEnumerable<CowFarms> GetAllCowFarms_Age12mByaiZone(string aiZone)
+        public async Task<IEnumerable<CowFarms>> GetAllCowFarms_Age12mByaiZone(string aiZone)
         {
             DateTime now = DateTime.Now;
             DateTime endDate = now.AddDays(-(330 + add));
@@ -120,6 +124,7 @@ namespace DairyAPI.Data
                             //select farm
                             select new CowFarms
                             {
+                                ccowNo = cow.ccowNo,
                                 ccowId = cow.ccowId,
                                 ccowName = cow.ccowName,
                                 cSex = cow.cSex,
@@ -139,11 +144,12 @@ namespace DairyAPI.Data
                                 fProvinceName = province.refProvinceName,
                                 aiZone = farm.aiZone
                             }
-                         );
-            return cowFarms;
+                         ).ToListAsync();
+            return await cowFarms;
         }
 
-        public IEnumerable<CowFarms> GetAllCowFarms_Age18m()
+        //public async Task<IEnumerable<CowFarms>> GetAllCowFarms_Age18m()
+        public async Task<IEnumerable<CowFarms>> GetAllCowFarms_Age18m()
         {
             //int add = 730;
             DateTime now = DateTime.Now;
@@ -165,6 +171,7 @@ namespace DairyAPI.Data
                             //select farm
                             select new CowFarms
                             {
+                                ccowNo = cow.ccowNo,
                                 ccowId = cow.ccowId,
                                 ccowName = cow.ccowName,
                                 cSex = cow.cSex,
@@ -184,11 +191,11 @@ namespace DairyAPI.Data
                                 fProvinceName = province.refProvinceName,
                                 aiZone = farm.aiZone
                             }
-                         );
-            return cowFarms;
+                         ).ToListAsync();
+            return await cowFarms;
         }
 
-        public IEnumerable<CowFarms> GetAllCowFarms_Age18mByaiZone(string aiZone)
+        public async Task<IEnumerable<CowFarms>> GetAllCowFarms_Age18mByaiZone(string aiZone)
         {
             DateTime now = DateTime.Now;
             DateTime endDate = now.AddDays(-(510 + add));
@@ -210,6 +217,7 @@ namespace DairyAPI.Data
                             //select farm
                             select new CowFarms
                             {
+                                ccowNo = cow.ccowNo,
                                 ccowId = cow.ccowId,
                                 ccowName = cow.ccowName,
                                 cSex = cow.cSex,
@@ -229,11 +237,11 @@ namespace DairyAPI.Data
                                 fProvinceName = province.refProvinceName,
                                 aiZone = farm.aiZone
                             }
-                         );
-            return cowFarms;
+                         ).ToListAsync();
+            return await cowFarms;
         }
 
-        public IEnumerable<CowFarms> GetAllCowFarms_Age4m()
+        public async Task<IEnumerable<CowFarms>> GetAllCowFarms_Age4m()
         {
             //int add = 730;
             DateTime now = DateTime.Now;
@@ -255,6 +263,7 @@ namespace DairyAPI.Data
                             //select farm
                             select new CowFarms
                             {
+                                ccowNo = cow.ccowNo,
                                 ccowId = cow.ccowId,
                                 ccowName = cow.ccowName,
                                 cSex = cow.cSex,
@@ -274,11 +283,11 @@ namespace DairyAPI.Data
                                 fProvinceName = province.refProvinceName,
                                 aiZone = farm.aiZone
                             }
-                         );
-            return cowFarms;
+                         ).ToListAsync();
+            return await cowFarms;
         }
 
-        public IEnumerable<CowFarms> GetAllCowFarms_Age4mByaiZone(string aiZone)
+        public async Task<IEnumerable<CowFarms>> GetAllCowFarms_Age4mByaiZone(string aiZone)
         {
             DateTime now = DateTime.Now;
             DateTime endDate = now.AddDays(-(90 + add));
@@ -300,6 +309,7 @@ namespace DairyAPI.Data
                             //select farm
                             select new CowFarms
                             {
+                                ccowNo = cow.ccowNo,
                                 ccowId = cow.ccowId,
                                 ccowName = cow.ccowName,
                                 cSex = cow.cSex,
@@ -319,23 +329,24 @@ namespace DairyAPI.Data
                                 fProvinceName = province.refProvinceName,
                                 aiZone = farm.aiZone
                             }
-                         );
-            return cowFarms;
+                         ).ToListAsync();
+            return await cowFarms;
         }
 
-        public IEnumerable<Cow> GetAllCows()
+        public async Task<IEnumerable<Cow>> GetAllCows()
         {
             var cows = (from cow in _context.Cow
                         where (cow.cMilkingStatus.Contains("MK") && cow.cActiveFlag == 1)
                         orderby cow.ccowId
-                        select cow).Take(50);
-            return cows;
+                        select cow).Take(50).ToListAsync();
+            return await cows;
         }
 
-        public Cow GetCowById(string ccowId)
+        public async Task<Cow> GetCowById(string ccowId)
         {
-            var cow = _context.Cow.FirstOrDefault(i => i.ccowId == ccowId);
-            return cow;
+            //var cow = _context.Cow.FirstOrDefault(i => i.ccowId == ccowId);
+            var cow = _context.Cow.FindAsync(ccowId);
+            return await cow;
         }
     }
 }

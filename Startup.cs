@@ -45,6 +45,14 @@ namespace DairyAPI
 
             services.AddScoped<IFarmRepo, FarmRepo>();
 
+            services.AddScoped<IMatingRepo, MatingRepo>();
+
+            services.AddScoped<ICalvingRepo, CalvingRepo>();
+
+            services.AddScoped<ICalveRepo, CalveRepo>();
+
+            services.AddScoped<IGrowthRepo, GrowthRepo>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DairyAPI", Version = "v1" });

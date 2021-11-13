@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DairyAPI.Models;
 
 namespace DairyAPI.Data
 {
     public interface IFarmRepo
     {
-        IEnumerable<Farm> GetAllFarms();
-        Farm GetFarmById(string fFarmId);
+        Task<IEnumerable<Farm>> GetAllFarms();
+        Task<Farm> GetFarmById(string fFarmId);
 
         //List<string> GetAllFarmsData();
     }

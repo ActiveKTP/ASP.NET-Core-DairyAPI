@@ -4,7 +4,7 @@ namespace DairyAPI.Dtos
 {
     public class CowReadDto
     {
-
+        public int ccowNo { get; set; }
         public string ccowId { get; set; }
         public string ccowName { get; set; }
         public string cSex { get; set; }

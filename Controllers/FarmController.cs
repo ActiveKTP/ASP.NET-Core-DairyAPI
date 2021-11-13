@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using DairyAPI.Data;
 using DairyAPI.Dtos;
@@ -21,16 +22,20 @@ namespace DairyAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<FarmReadDto>> GetAllFarms()
+        public async Task<ActionResult<IEnumerable<FarmReadDto>>> GetAllFarms()
         {
-            var farms = _repository.GetAllFarms();
-            return Ok(_mapper.Map<IEnumerable<FarmReadDto>>(farms));
+            var farms = await _repository.GetAllFarms();
+            if (farms != null)
+            {
+                return Ok(_mapper.Map<IEnumerable<FarmReadDto>>(farms));
+            }
+            return NotFound();
         }
 
         [HttpGet("{fFarmId}")]
-        public ActionResult<FarmReadDto> GetFarmById(string fFarmId)
+        public async Task<ActionResult<FarmReadDto>> GetFarmById(string fFarmId)
         {
-            var farm = _repository.GetFarmById(fFarmId);
+            var farm = await _repository.GetFarmById(fFarmId);
             if (farm != null)
             {
                 return Ok(_mapper.Map<FarmReadDto>(farm));

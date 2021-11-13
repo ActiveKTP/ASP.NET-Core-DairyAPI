@@ -6,7 +6,7 @@ namespace DairyAPI.Models
     public class Cow
     {
 
-        //public int ccowNo { get; set; }
+        public int ccowNo { get; set; }
 
         [Key]
         public string ccowId { get; set; }
