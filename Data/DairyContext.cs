@@ -22,6 +22,7 @@ namespace DairyAPI.Data
         public DbSet<CowFarms> CowFarms { get; set; }
         public DbSet<CowFarmsMatingPG> CowFarmsMatingPG { get; set; }
         public DbSet<CowFarmsGrowth> CowFarmsGrowth { get; set; }
+        public DbSet<CowFarmsGrowthCV> CowFarmsGrowthCV { get; set; }
 
     }
 }

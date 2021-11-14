@@ -65,5 +65,17 @@ namespace DairyAPI.Controllers
             }
             return NotFound();
         }
+
+        [Route("farm/cow/cv/{aiZone}/{year}/{month}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<CowFarmsGrowthCVReadDto>>> GetAllCowFarmsGrowthCV_aiZone(string aiZone, int year, int month)
+        {
+            var growth = await _repository.GetAllCowFarmsGrowthCV_aiZone(aiZone, year, month);
+            if (growth != null)
+            {
+                return Ok(_mapper.Map<IEnumerable<CowFarmsGrowthCVReadDto>>(growth));
+            }
+            return NotFound();
+        }
     }
 }

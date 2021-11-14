@@ -11,7 +11,7 @@ namespace DairyAPI.Data
         public int? bsTranId { get; set; }
         public int? maLactation { get; set; }
         public int? maNumberOfServiceInCurrLact { get; set; }
-        public DateTime? maDate { get; set; }
+        public DateTime maDate { get; set; }
         public string maMatingMethod { get; set; }
         public string maSemenId { get; set; }
         public int? maSemenDose { get; set; }
