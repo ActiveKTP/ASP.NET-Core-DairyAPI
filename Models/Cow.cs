@@ -6,7 +6,7 @@ namespace DairyAPI.Models
     public class Cow
     {
 
-        public int ccowNo { get; set; }
+        public int? ccowNo { get; set; }
 
         [Key]
         public string ccowId { get; set; }
@@ -15,7 +15,7 @@ namespace DairyAPI.Models
         public string cSireId { get; set; }
         public string cDamId { get; set; }
 
-        public DateTime? cBirthDate { get; set; }
+        public DateTime cBirthDate { get; set; }
 
         public string cStatus { get; set; }
         public string cProductionStatus { get; set; }

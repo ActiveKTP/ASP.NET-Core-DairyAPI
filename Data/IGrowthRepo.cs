@@ -8,5 +8,7 @@ namespace DairyAPI.Data
     {
         Task<IEnumerable<Growth>> GetAllGrowth();
         Task<Growth> GetGrowthBygTranId(int gTranId);
+
+        Task<IEnumerable<CowFarmsGrowth>> GetAllCowFarmsGrowth_type_aiZone(string type, string aiZone, int year, int month);
     }
 }
