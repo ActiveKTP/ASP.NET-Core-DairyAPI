@@ -9,6 +9,8 @@ namespace DairyAPI.Profiles
         public GrowthProfile()
         {
             CreateMap<Growth, GrowthReadDto>();
+            CreateMap<GrowthCreateDto, Growth>();
+            CreateMap<GrowthUpdateDto, Growth>();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DairyAPI.Data;
 using DairyAPI.Dtos;
+using DairyAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DairyAPI.Controllers
@@ -43,8 +44,8 @@ namespace DairyAPI.Controllers
             return NotFound();
         }
 
-        [Route("farm/cow/{type}/{aiZone}/{year}/{month}")]
-        [HttpGet]
+        //[Route("farm/cow/{type}/{aiZone}/{year}/{month}")]
+        [HttpGet("farm/cow/{type}/{aiZone}/{year}/{month}")]
         public async Task<ActionResult<IEnumerable<CowFarmsGrowthReadDto>>> GetAllCowFarmsGrowth_type_aiZone(string type, string aiZone, int year, int month)
         {
             int m, y;
@@ -66,8 +67,8 @@ namespace DairyAPI.Controllers
             return NotFound();
         }
 
-        [Route("farm/cow/cv/{aiZone}/{year}/{month}")]
-        [HttpGet]
+        //[Route("farm/cow/cv/{aiZone}/{year}/{month}")]
+        [HttpGet("farm/cow/cv/{aiZone}/{year}/{month}")]
         public async Task<ActionResult<IEnumerable<CowFarmsGrowthCVReadDto>>> GetAllCowFarmsGrowthCV_aiZone(string aiZone, int year, int month)
         {
             var growth = await _repository.GetAllCowFarmsGrowthCV_aiZone(aiZone, year, month);
@@ -76,6 +77,53 @@ namespace DairyAPI.Controllers
                 return Ok(_mapper.Map<IEnumerable<CowFarmsGrowthCVReadDto>>(growth));
             }
             return NotFound();
+        }
+
+        //Post api/growth
+        [HttpPost]
+        public async Task<ActionResult<GrowthReadDto>> CreateGrowth([FromBody] GrowthCreateDto growthCreateDto)
+        {
+            var growthModel = _mapper.Map<Growth>(growthCreateDto);
+            var newGrowth = await _repository.CreateGrowth(growthModel);
+            //_repository.SaveChanges();
+
+            //var growthReadDto = _mapper.Map<GrowthReadDto>(growthModel);
+
+            return CreatedAtAction(nameof(GetGrowthBygTranId), new { gTranId = newGrowth.gTranId }, newGrowth);
+        }
+
+        [HttpPut("{gTranId}")]
+        public async Task<ActionResult> UpdateGrowths(int gTranId, [FromBody] GrowthUpdateDto growthUpdateDto)
+        {
+            if (gTranId != growthUpdateDto.gTranId)
+            {
+                return BadRequest();
+            }
+
+            var growthToUpdate = await _repository.GetGrowthBygTranId(gTranId);
+            if (growthToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            //var growthModel = _mapper.Map<Growth>(growthUpdateDto);
+            _mapper.Map(growthUpdateDto, growthToUpdate);
+            await _repository.Update(growthToUpdate);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{gTranId}")]
+        public async Task<ActionResult> Delete(int gTranId)
+        {
+            var growthToDelete = await _repository.GetGrowthBygTranId(gTranId);
+            if (growthToDelete == null)
+            {
+                return NotFound();
+            }
+
+            await _repository.Delete(growthToDelete);
+            return NoContent();
         }
     }
 }

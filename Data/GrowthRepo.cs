@@ -16,6 +16,30 @@ namespace DairyAPI.Data
             _context = context;
         }
 
+        public async Task<Growth> CreateGrowth(Growth growth)
+        {
+            if (growth == null)
+            {
+                throw new ArgumentNullException(nameof(growth));
+            }
+
+            _context.Growth.Add(growth);
+            await _context.SaveChangesAsync();
+
+            return growth;
+        }
+
+        public async Task Delete(Growth growth)
+        {
+            //var growthDelete = await _context.Growth.FindAsync(gTranId);
+            if (growth == null)
+            {
+                throw new ArgumentNullException(nameof(growth));
+            }
+            _context.Growth.Remove(growth);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<CowFarmsGrowthCV>> GetAllCowFarmsGrowthCV_aiZone(string aiZone, int year, int month)
         {
             var queryString = from cow in _context.Cow
@@ -181,5 +205,16 @@ namespace DairyAPI.Data
             var growth = _context.Growth.FindAsync(gTranId);
             return await growth;
         }
+
+        public async Task Update(Growth growth)
+        {
+            _context.Entry(growth).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        /*public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
+        }*/
     }
 }
