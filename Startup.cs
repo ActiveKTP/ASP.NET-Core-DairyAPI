@@ -57,11 +57,22 @@ namespace DairyAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DairyAPI", Version = "v1" });
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAnyOrigin",
+                builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -75,10 +86,13 @@ namespace DairyAPI
 
             app.UseAuthorization();
 
+            app.UseCors("AllowAnyOrigin");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

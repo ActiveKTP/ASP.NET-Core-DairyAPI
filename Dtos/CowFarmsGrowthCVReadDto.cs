@@ -53,8 +53,24 @@ namespace DairyAPI.Dtos
         public int? maLactation { get; set; }
         public int? maNumberOfServiceInCurrLact { get; set; }
         public DateTime maDate { get; set; }
+        public string maDate_th
+        {
+            get
+            {
+                /*if (maDate != null)
+                {*/
+                var date_th = maDate.ToString().Split(' ')[0].Split('/');
+                return $"{date_th[1]}/{date_th[0]}/{Int32.Parse(date_th[2]) + 543}";
+                /* }
+                 else
+                 {
+                     return null;
+                 }*/
+            }
+            set { }
+        }
         //public string maMatingMethod { get; set; }
-        //public string maSemenId { get; set; }
+        public string maSemenId { get; set; }
         //public int? maSemenDose { get; set; }
         //public string maResult { get; set; }
         public string maPregResult { get; set; }
@@ -84,8 +100,24 @@ namespace DairyAPI.Dtos
         public int? cvgTranId { get; set; }
         //public int? cvgMaTranId { get; set; }
         //public int? cvgCowNo { get; set; }
-        public int? cvgLacNo { get; set; }
+        //public int? cvgLacNo { get; set; }
         public DateTime? cvgDate { get; set; }
+        public string cvgDate_th
+        {
+            get
+            {
+                if (cvgDate != null)
+                {
+                    var date_th = cvgDate.ToString().Split(' ')[0].Split('/');
+                    return $"{date_th[1]}/{date_th[0]}/{Int32.Parse(date_th[2]) + 543}";
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set { }
+        }
         public int? cvgNoOfCalves { get; set; }
         //public string cvgParturition { get; set; }
         //public string cvgCalvingResult { get; set; }
@@ -93,13 +125,14 @@ namespace DairyAPI.Dtos
         //public string cFarmId { get; set; }
         //public string cvgStaffId { get; set; }
 
-        public int? cvSeqNo { get; set; }
+        //public int? cvSeqNo { get; set; }
         public string cvCalveSex { get; set; }
-        public DateTime? cvDate { get; set; }
+        //public DateTime? cvDate { get; set; }
         //public string cvCalveNo { get; set; }
-        public string cvCalveName { get; set; }
+        //public string cvCalveName { get; set; }
         //public string cvPostCalveStatus { get; set; }
-        public float? cvWeight { get; set; }
+        public float cvWeight { get; set; }
+        //public string cvWeight { get; set; }
         //public float? cvCalveSalePrice { get; set; }
 
         public int? gTranId { get; set; }

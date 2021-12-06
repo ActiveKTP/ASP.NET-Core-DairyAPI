@@ -32,7 +32,7 @@ namespace DairyAPI.Models
         public int? maNumberOfServiceInCurrLact { get; set; }
         public DateTime? maDate { get; set; }
         //public string maMatingMethod { get; set; }
-        //public string maSemenId { get; set; }
+        public string maSemenId { get; set; }
         //public int? maSemenDose { get; set; }
         //public string maResult { get; set; }
         public string maPregResult { get; set; }
@@ -42,7 +42,7 @@ namespace DairyAPI.Models
         public int? cvgTranId { get; set; }
         //public int? cvgMaTranId { get; set; }
         //public int? cvgCowNo { get; set; }
-        public int? cvgLacNo { get; set; }
+        //public int? cvgLacNo { get; set; }
         public DateTime? cvgDate { get; set; }
         public int? cvgNoOfCalves { get; set; }
         //public string cvgParturition { get; set; }
@@ -51,13 +51,14 @@ namespace DairyAPI.Models
         //public string cFarmId { get; set; }
         //public string cvgStaffId { get; set; }
 
-        public int? cvSeqNo { get; set; }
+        //public int? cvSeqNo { get; set; }
         public string cvCalveSex { get; set; }
-        public DateTime? cvDate { get; set; }
+        //public DateTime? cvDate { get; set; }
         //public string cvCalveNo { get; set; }
-        public string cvCalveName { get; set; }
+        //public string cvCalveName { get; set; }
         //public string cvPostCalveStatus { get; set; }
         public double? cvWeight { get; set; }
+        //public string cvWeight { get; set; }
         //public double? cvCalveSalePrice { get; set; }
 
         public int? gTranId { get; set; }

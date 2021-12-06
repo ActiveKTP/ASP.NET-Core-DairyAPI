@@ -58,6 +58,18 @@ namespace DairyAPI.Controllers
             return NotFound();
         }
 
+        [Route("farm/{ccowId}")]
+        [HttpGet]
+        public async Task<ActionResult<CowFarmDataReadDto>> GetCowDataById(string ccowId)
+        {
+            var cow = await _repository.GetCowDataById(ccowId);
+            if (cow != null)
+            {
+                return Ok(_mapper.Map<CowFarmDataReadDto>(cow));
+            }
+            return NotFound();
+        }
+
         [Route("farm/age/{age}/{aiZone}/{startDate}/{endDate}")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CowFarmsReadDto>>> GetAllCowFarms_Age(int age, string aiZone, string startDate, string endDate)

@@ -14,6 +14,8 @@ namespace DairyAPI.Data
         public DbSet<RefProvince> RefProvince { get; set; }
         public DbSet<RefAmphur> RefAmphur { get; set; }
         public DbSet<Cow> Cow { get; set; }
+        public DbSet<CowBreed> CowBreed { get; set; }
+        public DbSet<CowFarmData> CowFarmData { get; set; }
         public DbSet<Mating> Mating { get; set; }
         public DbSet<Calving> Calving { get; set; }
         public DbSet<Calve> Calve { get; set; }

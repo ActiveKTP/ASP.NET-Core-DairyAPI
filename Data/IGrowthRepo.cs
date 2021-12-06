@@ -14,7 +14,9 @@ namespace DairyAPI.Data
         Task Update(Growth growth);
         Task Delete(Growth growth);
 
-        Task<IEnumerable<CowFarmsGrowth>> GetAllCowFarmsGrowth_type_aiZone(string type, string aiZone, int year, int month);
-        Task<IEnumerable<CowFarmsGrowthCV>> GetAllCowFarmsGrowthCV_aiZone(string aiZone, int year, int month);
+        Task<CowFarmsGrowth> GetGrowthByCowId_gStatus(string ccowId, string type);
+        Task<CowFarmsGrowthCV> GetGrowth_CVByCowId_gStatus(string ccowId, string type);
+        Task<IEnumerable<CowFarmsGrowth>> GetAllCowFarmsGrowth_type_aiZone(string type, string aiZone, int year, int month, int _start, int _limit);
+        Task<IEnumerable<CowFarmsGrowthCV>> GetAllCowFarmsGrowthCV_aiZone(string aiZone, int year, int month, int _start, int _limit);
     }
 }

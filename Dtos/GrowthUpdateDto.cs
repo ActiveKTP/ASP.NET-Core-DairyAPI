@@ -28,12 +28,12 @@ namespace DairyAPI.Dtos
         {
             get
             {
-                DateTime newDate = DateTime.Today;
+                DateTime newDate = DateTime.Now;
                 return newDate;
             }
             set
             {
-                DateTime date_updated = DateTime.Today;
+                DateTime date_updated = DateTime.Now;
                 //return newDate;
             }
         }

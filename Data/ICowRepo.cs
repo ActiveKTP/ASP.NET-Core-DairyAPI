@@ -10,6 +10,8 @@ namespace DairyAPI.Data
         Task<IEnumerable<Cow>> GetAllCows();
         Task<Cow> GetCowById(string ccowId);
 
+        Task<CowFarmData> GetCowDataById(string ccowId);
+
         Task<IEnumerable<CowFarms>> GetAllCowFarms();
         Task<IEnumerable<CowFarms>> GetAllCowFarms_Age4m();//30 Days
         Task<IEnumerable<CowFarms>> GetAllCowFarms_Age12m();//30 Days

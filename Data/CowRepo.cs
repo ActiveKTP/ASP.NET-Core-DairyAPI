@@ -20,40 +20,41 @@ namespace DairyAPI.Data
 
         public async Task<IEnumerable<CowFarms>> GetAllCowFarms()
         {
-            var cowFarms = (from
+            var queryString = (from
                          cow in _context.Cow
-                            join farm in _context.Farm on cow.cFarmId equals farm.fFarmId
-                            join province in _context.RefProvince on farm.fProvinceCode equals province.refProvinceId
-                            join amphur in _context.RefAmphur on farm.fAmphurCode equals amphur.refAmphurId
-                            where (
-                                farm.fStatus == "01" && cow.cActiveFlag == 1 && cow.cSex == "F" && cow.cStatus != "BU"
-                                )
-                            orderby cow.cBirthDate
-                            //select farm
-                            select new CowFarms
-                            {
-                                ccowNo = cow.ccowNo,
-                                ccowId = cow.ccowId,
-                                ccowName = cow.ccowName,
-                                cSex = cow.cSex,
-                                cSireId = cow.cSireId,
-                                cDamId = cow.cDamId,
-                                cBirthDate = cow.cBirthDate,
-                                cStatus = cow.cStatus,
-                                cProductionStatus = cow.cProductionStatus,
-                                cMilkingStatus = cow.cMilkingStatus,
-                                cLactation = cow.cLactation,
-                                cNumOfService = cow.cNumOfService,
-                                fFarmId = farm.fFarmId,
-                                fName = farm.fName,
-                                fAmphurCode = farm.fAmphurCode,
-                                fProvinceCode = farm.fProvinceCode,
-                                fAmphurName = amphur.refAmphurName,
-                                fProvinceName = province.refProvinceName,
-                                aiZone = farm.aiZone
-                            }
-                         ).Take(100).ToListAsync();
-            return await cowFarms;
+                               join farm in _context.Farm on cow.cFarmId equals farm.fFarmId
+                               join province in _context.RefProvince on farm.fProvinceCode equals province.refProvinceId
+                               join amphur in _context.RefAmphur on farm.fAmphurCode equals amphur.refAmphurId
+                               where (
+                                   farm.fStatus == "01" && cow.cActiveFlag == 1 && cow.cSex == "F" && cow.cStatus != "BU"
+                                   )
+                               orderby cow.ccowId
+                               //select farm
+                               select new CowFarms
+                               {
+                                   ccowNo = cow.ccowNo,
+                                   ccowId = cow.ccowId,
+                                   ccowName = cow.ccowName,
+                                   cSex = cow.cSex,
+                                   cSireId = cow.cSireId,
+                                   cDamId = cow.cDamId,
+                                   cBirthDate = cow.cBirthDate,
+                                   cStatus = cow.cStatus,
+                                   cProductionStatus = cow.cProductionStatus,
+                                   cMilkingStatus = cow.cMilkingStatus,
+                                   cLactation = cow.cLactation,
+                                   cNumOfService = cow.cNumOfService,
+                                   fFarmId = farm.fFarmId,
+                                   fName = farm.fName,
+                                   fAmphurCode = farm.fAmphurCode,
+                                   fProvinceCode = farm.fProvinceCode,
+                                   fAmphurName = amphur.refAmphurName,
+                                   fProvinceName = province.refProvinceName,
+                                   aiZone = farm.aiZone
+                               }
+                         );
+            Console.WriteLine(queryString.ToQueryString());
+            return await queryString.Take(100).ToListAsync();
         }
 
         public async Task<IEnumerable<CowFarmsMatingPG>> GetAllCowFarmsMatingPG()
@@ -645,6 +646,43 @@ namespace DairyAPI.Data
             //var cow = _context.Cow.FirstOrDefault(i => i.ccowId == ccowId);
             var cow = _context.Cow.FindAsync(ccowId);
             return await cow;
+        }
+
+        public async Task<CowFarmData> GetCowDataById(string ccowId)
+        {
+            var queryString = (from
+                         cow in _context.Cow
+                               join cowBreed in _context.CowBreed on cow.ccowId equals cowBreed.cbcowId
+                               join farm in _context.Farm on cow.cFarmId equals farm.fFarmId
+                               where (
+                                   cow.cActiveFlag == 1 && cow.cSex == "F" && cow.cStatus != "BU"
+                                   && cow.ccowId == ccowId
+                                   )
+                               //orderby cow.cBirthDate
+                               //select farm
+                               select new CowFarmData
+                               {
+                                   ccowNo = cow.ccowNo,
+                                   ccowId = cow.ccowId,
+                                   ccowName = cow.ccowName,
+                                   cSex = cow.cSex,
+                                   cSireId = cow.cSireId,
+                                   cDamId = cow.cDamId,
+                                   cBirthDate = cow.cBirthDate,
+                                   cStatus = cow.cStatus,
+                                   cProductionStatus = cow.cProductionStatus,
+                                   cMilkingStatus = cow.cMilkingStatus,
+                                   cLactation = cow.cLactation,
+                                   cNumOfService = cow.cNumOfService,
+                                   fFarmId = farm.fFarmId,
+                                   fName = farm.fName,
+                                   aiZone = farm.aiZone,
+                                   cbBreedId = cowBreed.cbBreedId,
+                                   cbBreedDetail = cowBreed.cbBreedDetail
+                               }
+                         );
+            Console.WriteLine(queryString.ToQueryString());
+            return await queryString.FirstAsync();
         }
     }
 }
